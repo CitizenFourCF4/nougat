@@ -48,7 +48,7 @@ model = None
 
 @app.on_event("startup")
 async def load_model(
-    checkpoint: str = NOUGAT_CHECKPOINT,
+    checkpoint: str = '/workspace/model',
 ):
     global model, BATCHSIZE
     if model is None:
