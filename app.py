@@ -13,6 +13,7 @@ from PIL import Image
 from pathlib import Path
 import hashlib
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 import pypdfium2
 import torch
 from nougat import NougatModel
@@ -160,7 +161,7 @@ async def predict(
         )
     final = "".join(predictions).strip()
     (save_path / "doc.mmd").write_text(final, encoding="utf-8")
-    return final
+    return FileResponse(os.path.join(save_path, "doc.mmd"), media_type="text/markdown")
 
 
 def main():
